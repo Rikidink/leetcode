@@ -15,25 +15,20 @@ class Solution:
         n = 0
         c = r
         while x or y or n:
-            vx = 0
-            vy = 0
+            o = 0
             if x:
-                vx = x.val
+                o += x.val
                 x = x.next
             if y:
-                vy = y.val
+                o += y.val
                 y = y.next
-            m = vx + vy + n
+            m = o + n
             n = m//10
-            c.val = m%10
-            if not x and not y and not n:
-                break
-            c.next = ListNode()
+            c.next = ListNode(m%10)
             c = c.next
-        return r
+        return r.next
 
-            
-                
+         
 
 if __name__ == "__main__":
     x = ListNode(9, ListNode(9, ListNode(9, ListNode(9, ListNode(9, ListNode(9, ListNode(9)))))))
