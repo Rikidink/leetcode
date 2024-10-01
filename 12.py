@@ -26,6 +26,9 @@ class Solution:
             decimal = length - i
             print(decimal)
 
+            if integer == 0:
+                continue
+
             # upper limit is 3999 inclusive so don't need to handle other cases
             if decimal == 4:
                 result += 'M' * integer
@@ -72,4 +75,4 @@ class Solution:
 
 if __name__ == "__main__":
     s = Solution()
-    s.intToRoman(3749)
+    s.intToRoman(10)
