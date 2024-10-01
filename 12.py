@@ -6,15 +6,14 @@
 class Solution:
     def intToRoman(self, num: int) -> str:
         symbols = {
-            'I': '1',
-            'V': '5',
-            'X': '10',
-            'L': '50',
-            'C': '100',
-            'D': '500',
-            'M': '1000'
+            1: 'I',
+            5: 'V',
+            10: 'X',
+            50: 'L',
+            100: 'C',
+            500: 'D',
+            1000: 'M'
         }
-
 
         nums = list(str(num))
         result = ""
@@ -24,49 +23,20 @@ class Solution:
         for i in range(length):
             integer = int(nums[i])
             decimal = length - i
-            print(decimal)
-
-            if integer == 0:
-                continue
 
             # upper limit is 3999 inclusive so don't need to handle other cases
             if decimal == 4:
                 result += 'M' * integer
-
-            elif decimal == 3:
-                if 1 <= integer <= 3:
-                    result += 'C' * integer
-                elif 5 <= integer <= 8:
-                    result += 'D'
-                    result += 'C' * (integer - 5)
-                elif integer == 4:
-                    result += 'CD'
-                else:
-                    result += 'CM'
             
-            elif decimal == 2:
-                if 1 <= integer <= 3:
-                    result += 'X' * integer
-                elif 5 <= integer <= 8:
-                    result += 'L'
-                    result += 'X' * (integer - 5)
-                elif integer == 4:
-                    result += 'XL'
-                else:
-                    result += 'XC'
-
-            elif decimal == 1:
-                if 1 <= integer <= 3:
-                    result += 'I' * integer
-                elif 5 <= integer <= 8:
-                    result += 'V'
-                    result += 'I' * (integer - 5)
-                elif integer == 4:
-                    result += 'IV'
-                else:
-                    result += 'IX' 
-
-
+            elif 1 <= integer <= 3:
+                result += symbols[10**(decimal-1)] * integer
+            elif 5 <= integer <= 8:
+                result += symbols[5 * (10**(decimal-1))]
+                result += symbols[10**(decimal-1)] * (integer - 5)
+            elif integer == 4:
+                result += symbols[10**(decimal-1)] + symbols[5 * (10**(decimal-1))]
+            elif integer == 9:
+                result += symbols[10**(decimal-1)] + symbols[10**(decimal)]
 
         return result
 
@@ -75,4 +45,4 @@ class Solution:
 
 if __name__ == "__main__":
     s = Solution()
-    s.intToRoman(10)
+    s.intToRoman(3749)
